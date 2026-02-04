@@ -48,17 +48,17 @@ def main():
             obj.draw(screen)
         updatable.update(dt)
 
-        for obj in asteroids:
-            if player.collides_with(obj):
+        for asteroid_obj in asteroids:
+            if player.collides_with(asteroid_obj):
                 log_event("player_hit")
                 print("Game over!")
                 sys.exit()
-                
-        for obj in asteroids:
-            for i in shots:
-                if i.collides_with(obj):
-                    i.kill()
-                    obj.kill()
+
+        for asteroid_obj in asteroids:
+            for bullet in shots:
+                if bullet.collides_with(asteroid_obj):
+                    bullet.kill()
+                    asteroid_obj.split()
                     log_event("asteroid_shot")
 
         pygame.display.flip()
